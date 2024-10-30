@@ -9,9 +9,11 @@ Para rodar este código, você precisará de um ambiente que suporte JavaScript,
 - [Node.js](https://nodejs.org/) (versão 12 ou superior)
 - Um navegador com suporte a JavaScript
 
-## Observação
+## Observações
 
 Mesmo sabendo que ter muitos comentários no código não é uma boa prática, inseri explicações em cada linha para detalhar a lógica que utilizei na resolução do problema.
+
+Para a alteração do Payload de entrada, basta alterar o primeiro paramentro da função "desafioTopazio"
 
 ## Como Executar o Código
 
@@ -27,4 +29,4 @@ Navegue até o diretório do projeto e execute:
 node index.js
 ```
 
-Para a alteração do Payload de entrada, basta alterar o primeiro paramentro da função "desafioTopazio"
+
