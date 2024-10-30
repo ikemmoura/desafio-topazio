@@ -16,7 +16,7 @@ const jsonData = {
         phone: ["Living Room", {
             name: "#",
             document: undefined,
-            address: "",
+            address: "#"
         }, "#", "02"],
     }
 };
@@ -38,27 +38,27 @@ function cleanedJson(data, removeEmptyArrayObj) {
     if (Array.isArray(data)) { // Verifica se data é do tipo array.
         if (removeEmptyArrayObj) {// Verifica se deve remover os Array e Objetos vazios
             return data
-                .map(item => cleanedJson(item)) // Chama a função recursivamente para cada item do array
+                .map(item => cleanedJson(item, removeEmptyArrayObj)) // Chama a função recursivamente para cada item do array
                 .filter(item => item !== null && item !== undefined && item !== "" && item !== "#") // Filtra os itens que não são null, undefined, "" e "#"
                 .filter(item => !(Array.isArray(item) && item.length === 0)) // Remove arrays vazios
                 .filter(item => !(typeof item === "object" && item && Object.keys(item).length === 0)); // Remove objetos vazios
         }
 
         return data
-            .map(item => cleanedJson(item)) // Chama a função recursivamente para cada item do array
+            .map(item => cleanedJson(item, removeEmptyArrayObj)) // Chama a função recursivamente para cada item do array
             .filter(item => item !== null && item !== undefined && item !== "" && item !== "#") // Filtra os itens que não são null, undefined, "" e "#"
 
     } else if (data && typeof data === "object") { // Verifica se data é do tipo objeto.
         if (removeEmptyArrayObj) { // Verifica se deve remover os Array e Objetos vazios
             return Object.fromEntries( // Converte o objeto em um array de pares [chave, valor]
-                Object.entries(data).map(([key, value]) => [key, cleanedJson(value)]) // Para cada par [chave, valor], chama a função recursivamente para o valor
+                Object.entries(data).map(([key, value]) => [key, cleanedJson(value, removeEmptyArrayObj)]) // Para cada par [chave, valor], chama a função recursivamente para o valor
                     .filter(([, value]) => value !== null && value !== undefined && value !== "" && value !== "#") // Filtra os valores que não são null, undefined, "" e "#"
                     .filter(([, value]) => !(Array.isArray(value) && value.length === 0)) // Remove arrays vazios
                     .filter(([, value]) => !(typeof value === "object" && value && Object.keys(value).length === 0)) // Remove objetos vazios
             );
         }
         return Object.fromEntries( // Converte o objeto em um array de pares [chave, valor]
-            Object.entries(data).map(([key, value]) => [key, cleanedJson(value)]) // Para cada par [chave, valor], chama a função recursivamente para o valor
+            Object.entries(data).map(([key, value]) => [key, cleanedJson(value, removeEmptyArrayObj)]) // Para cada par [chave, valor], chama a função recursivamente para o valor
                 .filter(([, value]) => value !== null && value !== undefined && value !== "" && value !== "#"))// Filtra os valores que não são null, undefined, "" e "#"
 
     }
@@ -81,7 +81,7 @@ function desafioTopazio(inputJson, removeEmptyArrayObj) {
 
 //Como não estava claro na descrição se era permitido no resultado final chaves com valor array vazio e objeto vazio, criei um parametro booleano que caso for true ele trata esses casos.
 //O primeiro parametro se refere ao Payload de entrada e o segundo é o booleano que verifica se o usuário deseja (true), ou não (false), remover as chaves cujo o valor é array vazio ou objeto vazio. 
-const output = desafioTopazio(jsonDataString, true); //Constante result recebe o  Payload de saída
+const output = desafioTopazio(jsonData, true); //Constante result recebe o  Payload de saída
 
 // Imprime no terminal o objeto limpo em formato JSON, com espaçamento de 2 para melhor legibilidade
 console.log(JSON.stringify(output, null, 2));
