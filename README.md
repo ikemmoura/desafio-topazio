@@ -17,11 +17,14 @@ Mesmo sabendo que muitos comentários no código não são uma boa prática, ins
 
 Abra o terminal e clone este repositório para sua máquina local:
 
-````bash
+```bash
 git clone https://github.com/ikemmoura/desafio-topazio.git
+```
 
 Navegue até o diretório do projeto e execute:
 
 ```bash
 node index.js
-````
+```
+
+Para a alteração do Payload de entrada, basta alterar o primeiro paramentro da função "desafioTopazio"

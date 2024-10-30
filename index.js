@@ -31,7 +31,7 @@ const jsonDataNumber = 233;
 const jsonDataNull = null;
 const jsonDataInvalid1 = "Teste JSON inválido";
 const jsonDataInvalid2 = "";
-const jsonDataInvalid3 = '{"name": "Henrique", "age": 30}';
+const jsonDataInvalid3 = '{"name": "Henrique" "age": 30}';
 const jsonDataInvalid4 = undefined;
 
 function cleanedJson(data) {
@@ -54,7 +54,7 @@ function cleanedJson(data) {
 function desafioTopazio(inputJson, removeEmptyArrayObj) {
     try {
         // Verifica se o parâmetro é um objeto; caso não seja, faz o JSON.parse para verificar se é um JSON válido
-        let objJson = typeof inputJson === 'object' ? jsonInicial : JSON.parse(inputJson); 
+        let objJson = typeof inputJson === 'object' ? inputJson : JSON.parse(inputJson); 
         let result = cleanedJson(objJson);
         if (removeEmptyArrayObj) { // Permite remover chaves com valor objeto vazio ou array vazio, se o parâmetro for true
             for (let key in result) { // Varre o JSON já limpo
@@ -73,7 +73,7 @@ function desafioTopazio(inputJson, removeEmptyArrayObj) {
 
 //Como não estava claro na descrição se era permitido no resultado final chaves com valor array vazio e objeto vazio, criei um parametro booleano que caso for true ele trata esses casos.
 //O primeiro parametro se refere ao Payload de entrada e o segundo é o booleano que verifica se o usuário deseja (true), ou não (false), remover as chaves cujo o valor é array vazio ou objeto vazio. 
-const output = desafioTopazio(jsonDataString, true); //Constante result recebe o  Payload de saída
+const output = desafioTopazio("", true); //Constante result recebe o  Payload de saída
 
-// Imprime o objeto limpo em formato JSON, com espaçamento de 2 para melhor legibilidade
+// Imprime no terminal o objeto limpo em formato JSON, com espaçamento de 2 para melhor legibilidade
 console.log(JSON.stringify(output, null, 2));
